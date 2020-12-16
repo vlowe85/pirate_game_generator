@@ -63,9 +63,13 @@ class _HomePageState extends State<HomePage> {
             Text(
               'The next grid reference is:',
             ),
-            Text(
-              '${_gridItem.reference}',
-              style: Theme.of(context).textTheme.headline1,
+            AnimatedSwitcher(
+              duration: Duration(milliseconds: 200),
+              child: Text(
+                '${_gridItem.reference}',
+                key: ValueKey(_gridItem.reference),
+                style: Theme.of(context).textTheme.headline1,
+              ),
             ),
             Text(
               '${_gridCoordinates.where((element) => element.used).toList().length} turns taken',
@@ -111,15 +115,19 @@ class _GridItemBox extends StatelessWidget {
   const _GridItemBox({Key key, this.gridItem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black12,
-          width: 1,
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 300),
+      child: Container(
+        key: ValueKey(gridItem.used),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black12,
+            width: 1,
+          ),
+          color: gridItem.used ? Colors.green : Colors.black12,
         ),
-        color: gridItem.used ? Colors.green : Colors.black12,
+        child: Center(child: Text(gridItem.reference, style: TextStyle(fontWeight: FontWeight.bold))),
       ),
-      child: Center(child: Text(gridItem.reference, style: TextStyle(fontWeight: FontWeight.bold))),
     );
   }
 }
