@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     return _GridItemBox(gridItem: _gridCoordinates[index]);
                   }),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 60),
           ],
         ),
       ),
